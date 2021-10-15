@@ -153,13 +153,7 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		
-		ModelAndView modelAndView = new ModelAndView();
-		model.addAttribute("product", product);
-		model.addAttribute("menu",request.getParameter("menu"));
-		modelAndView.addObject("product", product);
-		modelAndView.addObject("menu",request.getParameter("menu"));
-		modelAndView.setViewName("forward:/product/getProduct.jsp");
-		
+	
 		
 		
 		Cookie[] cook = request.getCookies();
@@ -180,6 +174,14 @@ public class ProductController {
 		}
 		//Cookie cookie = new Cookie("history",String.valueOf(prodNo));
 		response.addCookie(cookiee);
+		System.out.println("여긴쿠키 : "+cookiee);
+		
+		ModelAndView modelAndView = new ModelAndView();
+	
+		modelAndView.addObject("product", product);
+		modelAndView.addObject("menu",request.getParameter("menu"));
+		modelAndView.setViewName("forward:/product/getProduct.jsp");
+		modelAndView.addObject("Cookie",cookiee);
 		return modelAndView;
 	}
 	

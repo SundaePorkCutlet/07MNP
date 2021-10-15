@@ -74,7 +74,7 @@ Product productVO = (Product)request.getAttribute("vo");
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-		<img 	src="/images/uploadFiles/AHlbAAAAtBqyWAAA.jpg" width="56" height="42" align="absmiddle">
+		<img 	src="/images/uploadFiles/${product.fileName }" width="560" height="420" align="absmiddle">
 		</td>
 			<!--<img src = "/images/uploadFiles/../../images/empty.GIF"/>-->
 		</td>
