@@ -58,5 +58,7 @@
 									expression="execution(* com.model2.mvc.service..*ServiceImpl.*(..) )" />
 		<aop:advisor 	advice-ref="txAdvice"  pointcut-ref="requiredTx"  />
 	</aop:config>
+	
+	
 
 </beans>
