@@ -12,6 +12,8 @@
 
 <form name="updatePurchase" action="/purchase/updatePurchase?tranNo=${purchase.tranNo}" method="post">
 
+
+<c:if test="${remainPoint>-1 || purchase.paymentOption!='3'}">
 다음과 같이 구매가 되었습니다.
 
 <table border=1>
@@ -33,6 +35,9 @@
 			 </c:if>
 		<c:if test="${purchase.paymentOption =='2'}">
 			신용구매
+			</c:if>
+		<c:if test="${purchase.paymentOption =='3'}">
+			포인트구매
 			</c:if>
 		</td>
 		<td></td>
@@ -63,4 +68,12 @@
 		<td></td>
 	</tr>
 </table>
+</c:if>
+<c:if test ="${remainPoint<0 && purchase.paymentOption =='3'}">
+포인트가 부족하여 구매에 실패했습니다.
+</c:if>
 </form>
+
+</body>
+
+

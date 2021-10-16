@@ -59,7 +59,9 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
+		user.setPoint(1000000);
 		userService.addUser(user);
+		
 		
 		return "redirect:/user/loginView.jsp";
 	}

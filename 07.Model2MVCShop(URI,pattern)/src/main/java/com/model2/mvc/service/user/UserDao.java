@@ -21,6 +21,8 @@ public interface UserDao {
 	// UPDATE
 	public void updateUser(User user) throws Exception ;
 	
+	public void updatePoint(User user) throws Exception ;
+	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
 	

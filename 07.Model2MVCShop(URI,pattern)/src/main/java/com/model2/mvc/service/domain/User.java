@@ -20,9 +20,17 @@ public class User {
 	private String phone1;
 	private String phone2;
 	private String phone3;
+	private int point;
+	
+	
+	public int getPoint() {
+		return point;
+	}
 
-	
-	
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 	///Constructor
 	public User(){
 	}
@@ -101,7 +109,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role
+				+ ", ssn=" + ssn + ", phone=" + phone + ", addr=" + addr + ", email=" + email + ", regDate=" + regDate
+				+ ", phone1=" + phone1 + ", phone2=" + phone2 + ", phone3=" + phone3 + ", point=" + point + "]";
 	}
 }

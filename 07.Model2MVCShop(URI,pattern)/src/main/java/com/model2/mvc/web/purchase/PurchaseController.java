@@ -79,24 +79,50 @@ public class PurchaseController {
 								@RequestParam("receiverAddr") String Addr,
 								@RequestParam("receiverRequest") String Request,
 								@RequestParam("receiverDate") String Date,
+								
 								HttpServletRequest request,
 									Model model) throws Exception {
 
 		System.out.println("/addPurchase : POST");
+		System.out.println();
 
 		Product product = productService.getProduct(prodNo);
-		purchase.setPurchaseProd(product);
-		purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
-		purchase.setDivyAddr(Addr);
-		purchase.setDivyRequest(Request);
-		purchase.setDivyDate(Date);
-		purchase.setTranCode("001");
-		purchaseService.addPurchase(purchase);
+		User user = (User)request.getSession(true).getAttribute("user");
+		int remainPoint = user.getPoint()-product.getPrice();
 		
+		System.out.println(remainPoint);
+		System.out.println("구매방법"+purchase.getPaymentOption());
+		if(purchase.getPaymentOption().equals("3")) {
+		if(remainPoint>0) {
+			System.out.println("포인트구매 진입");
+			
+			user.setPoint(remainPoint);
+			purchase.setPurchaseProd(product);
+			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
+			purchase.setDivyAddr(Addr);
+			purchase.setDivyRequest(Request);
+			purchase.setDivyDate(Date);
+			purchase.setTranCode("001");
+			purchaseService.addPurchase(purchase);
+			userService.updatePoint(user);
+			
+		}
+		}else {
+			purchase.setPurchaseProd(product);
+			purchase.setBuyer((User)(request.getSession(true).getAttribute("user")));
+			purchase.setDivyAddr(Addr);
+			purchase.setDivyRequest(Request);
+			purchase.setDivyDate(Date);
+			purchase.setTranCode("001");
+			purchaseService.addPurchase(purchase);
+		}
+	
+	
 //		model.addAttribute("PurchaseProd",product);
 //		model.addAttribute("Buyer",request.getSession(true).getAttribute("user"));
+		model.addAttribute("remainPoint",remainPoint);
 		
-		System.out.println(request.getSession(true).getAttribute("user"));
+		System.out.println(user);
 		
 		
 		

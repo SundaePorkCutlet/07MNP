@@ -96,6 +96,7 @@ function fncAddPurchase() {
 	</tr>
 	<tr>
 		<td width="104" class="ct_write">가격</td>
+		<input type="hidden" name="price" value="${product.price}" />
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">${product.price}</td>
 	</tr>
@@ -129,6 +130,7 @@ function fncAddPurchase() {
 							style="width: 100px; height: 19px" maxLength="20">
 				<option value="1" selected="selected">현금구매</option>
 				<option value="2">신용구매</option>
+				<option value="3">포인트구매</option>
 			</select>
 		</td>
 	</tr>
@@ -192,6 +194,9 @@ function fncAddPurchase() {
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+	
+	
+	
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">

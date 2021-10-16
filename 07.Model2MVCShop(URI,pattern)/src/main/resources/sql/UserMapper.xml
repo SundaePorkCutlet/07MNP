@@ -17,20 +17,21 @@
 		<result property="addr" 				column="addr" 					jdbcType="VARCHAR" />
 		<result property="email" 			column="email" 				jdbcType="NUMERIC"  />
 		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+		<result property="point" 			column="point" 				jdbcType="NUMERIC"  />
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addUser"		parameterType="user" >
 	 	INSERT
-		INTO users( user_id , user_name , password , role , ssn, cell_phone, addr, email , reg_date) 
+		INTO users( user_id , user_name , password , role , ssn, cell_phone, addr, email , reg_date , point) 
 		VALUES	 (	#{userId} , #{userName} , #{password} , 'user' , #{ssn:VARCHAR} , 
-							#{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE )
+							#{phone:VARCHAR} , #{addr:VARCHAR} , #{email:VARCHAR} , SYSDATE ,1000000)
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
-		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date 		
+		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date , point		
 		FROM users 
 		WHERE user_id = #{value}
 	 </select>
@@ -45,6 +46,14 @@
 			email				=	#{email}
 	   	</set>
 	   	WHERE user_id = #{userId}
+	 </update>
+	 
+	  <update	id="updatePoint"	parameterType="user" >
+	   	UPDATE users
+	   	<set>
+	   		point = #{point}
+	   	</set>
+	   		WHERE user_id = #{userId}
 	 </update>
 		 
 	<!-- SQL : SELECT LIST -->

@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html>
 <head>
@@ -19,6 +21,14 @@
   </tr>
   <tr>
     <td width="800" height="30"><h2>Model2 MVC Shop</h2></td>
+      <td>
+      <c:if test="${ ! empty user }">
+      아이디 : ${user.userId }
+      포인트 : <fmt:formatNumber value="${user.point }" pattern="#,###" />
+
+
+      </c:if>
+      </td>
   </tr>
   <tr>
     <td height="20" align="right" background="/images/img_bg.gif">
