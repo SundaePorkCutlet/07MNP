@@ -30,7 +30,7 @@ function history(){
 							<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							<a href="/getUser.do?userId=${user.userId}" target="rightFrame">개인정보조회</a>
 							////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-							<a href="/user/getUser?userId=${user.userId}" target="rightFrame">개인정보조회</a>
+							<a href="/user/getUser?userId=${user.userId}" target="rightFrame">개인정보조회</a><hr>
 						</td>
 					</tr>
 				</c:if>
@@ -41,7 +41,7 @@ function history(){
 							<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							<a href="/listUser.do" target="rightFrame">회원정보조회</a>
 							////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-							<a href="/user/listUser" target="rightFrame">회원정보조회</a>
+							<a href="/user/listUser" target="rightFrame">회원정보조회</a><hr>
 						</td>
 					</tr>
 				</c:if>
@@ -60,12 +60,12 @@ function history(){
 			<table  border="0" cellspacing="0" cellpadding="0" width="159">
 				<tr>
 					<td class="Depth03">
-						<a href="../product/addProductView.jsp;" target="rightFrame">판매상품등록</a>
+						<a href="../product/addProductView.jsp;" target="rightFrame">판매상품등록</a><hr>
 					</td>
 				</tr>
 				<tr>
 					<td class="Depth03">
-						<a href="/product/listProduct?menu=manage"  target="rightFrame">판매상품관리</a>
+						<a href="/product/listProduct?menu=manage"  target="rightFrame">판매상품관리</a><hr>
 					</td>
 				</tr>
 				<tr>
@@ -82,14 +82,14 @@ function history(){
 		<table  border="0" cellspacing="0" cellpadding="0" width="159">
 			<tr>
 				<td class="Depth03">
-					<a href="/product/listProduct?menu=search" target="rightFrame">상 품 검 색</a>
+					<a href="/product/listProduct?menu=search" target="rightFrame">상 품 검 색</a><hr>
 				</td>
 			</tr>
 			
 			<c:if test="${ !empty user && user.role == 'user'}">
 			<tr>
 				<td class="Depth03">
-					<a href="/purchase/listPurchase"  target="rightFrame">구매이력조회</a>
+					<a href="/purchase/listPurchase"  target="rightFrame">구매이력조회</a><hr>
 				</td>
 			</tr>
 			</c:if>
@@ -98,8 +98,15 @@ function history(){
 				<td class="DepthEnd">&nbsp;</td>
 			</tr>
 			<tr>
-				<td class="Depth03"><a href="javascript:history()">최근 본 상품</a></td>
+				<td class="Depth03"><a href="javascript:history()">최근 본 상품</a><hr></td>
 			</tr>
+				<c:if test="${ !empty user }">
+			<tr>
+				<td class="Depth03">
+					<a href="../miniGame/randomView.jsp;" target="rightFrame">미 니 게 임 </a><hr>
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</td>
 </tr>

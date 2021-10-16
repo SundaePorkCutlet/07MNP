@@ -254,5 +254,35 @@ public class PurchaseController {
 		return "redirect:/purchase/listPurchase";
 	}
 	
-	
+	@RequestMapping(value="random" )
+	public String random( Model model , 
+						HttpServletRequest request,
+						@RequestParam("gameNumber") int gameNumber,
+						@RequestParam("gamePoint") int gamePoint
+								) throws Exception{
+		User user = (User)(request.getSession(true).getAttribute("user"));
+		int result = (int)((Math.random()*5)+1);
+		if(user.getPoint()-gamePoint>-1 && gamePoint >0) {
+			if(result == gameNumber) {
+				gamePoint = gamePoint*2;
+				model.addAttribute("rs","정답");
+			}else {
+				gamePoint = gamePoint*(-1);
+				model.addAttribute("rs","오답");
+			}
+		}else {
+			model.addAttribute("rs","부족");
+			return "forward:/miniGame/random.jsp";
+		}
+		
+		int remainPoint = user.getPoint() + gamePoint;
+		user.setPoint(remainPoint);
+		userService.updatePoint(user);
+		model.addAttribute("result",result);
+		model.addAttribute("gamePoint",gamePoint);
+		model.addAttribute("gameNumber",gameNumber);
+		
+		
+		return "forward:/miniGame/random.jsp";
+	}
 }
