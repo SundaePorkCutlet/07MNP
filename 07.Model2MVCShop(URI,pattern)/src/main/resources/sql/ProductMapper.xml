@@ -55,9 +55,27 @@
 													</if>
 												</where>
 											</if>
-											ORDER BY pr.PROD_NAME) IT
+											<if test = "orderOption == 0">
+											ORDER BY pr.PROD_NAME 
+											</if>
+											<if test = "orderOption == 1">
+											ORDER BY  pr.PRICE desc
+											</if>
+											<if test = "orderOption == 2">
+											ORDER BY pr.PRICE
+											</if>
+											<if test = "orderOption == 3">
+											ORDER BY  pr.REG_DATE desc
+											</if>
+											<if test = "orderOption == 4">
+											ORDER BY pr.reg_date
+											</if>
+											
+											
+											) IT
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+		
 	 </select>
 		
 			 <select  id="getTotalCount"  parameterType="search"	 resultType="int">

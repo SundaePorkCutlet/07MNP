@@ -75,7 +75,7 @@ public class ProductController {
 		System.out.println("======================================================================");
 		
 			
-			String temDir = "C:\\Users\\AIA\\git\\repository2\\07MNP\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles"; 
+			String temDir = "C:\\Users\\홍\\git\\07MNP\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles"; 
 		
 				
 			
@@ -194,9 +194,13 @@ public class ProductController {
 			cookiee = new Cookie("history", String.valueOf(prodNo));
 			
 		}
+
+		cookiee.setPath("/");
 		//Cookie cookie = new Cookie("history",String.valueOf(prodNo));
 		response.addCookie(cookiee);
-		System.out.println("여긴쿠키 : "+cookiee);
+		
+		
+		System.out.println("여긴쿠키 : "+request.getCookies()[0].getName());
 		
 		ModelAndView modelAndView = new ModelAndView();
 	
@@ -252,13 +256,14 @@ public class ProductController {
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
-		
+		System.out.println("서치는" +search);
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("menu",request.getParameter("menu"));
 		model.addAttribute("proTranCode","000");
+		
 		return "forward:/product/listProduct.jsp";
 
 	}

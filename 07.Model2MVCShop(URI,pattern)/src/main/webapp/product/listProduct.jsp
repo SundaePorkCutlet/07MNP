@@ -76,9 +76,25 @@ function fncGetUserList(currentPage) {
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
 	<tr>
-
 	
-		<td align="right">
+	<td align="right">
+	
+			<input type="radio" name="orderOption" id = "orderOption0" value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "checked" : "" }/><label for = "orderOption0">상품명순</label>		 
+		<input type="radio" name="orderOption" id = "orderOption1" value="1"  ${ ! empty search.orderOption && search.orderOption==1 ? "checked" : "" }/><label for = "orderOption1">높은가격순</label>
+		<input type="radio" name="orderOption" id = "orderOption2" value="2"  ${ ! empty search.orderOption && search.orderOption==2 ? "checked" : "" }/><label for = "orderOption2">낮은가격순</label>														
+		<input type="radio" name="orderOption" id = "orderOption3" value="3"  ${ ! empty search.orderOption && search.orderOption==3 ? "checked" : "" }/><label for = "orderOption3">최신순</label>														
+		<input type="radio" name="orderOption" id = "orderOption4" value="4"  ${ ! empty search.orderOption && search.orderOption==4 ? "checked" : "" }/><label for = "orderOption4">오래된순</label>														
+			
+		
+<!-- 				<td align="right"> -->
+<!-- 			<select name="orderOption" class="ct_input_g" style="width:80px"> -->
+<%-- 			<option value="0"  ${ ! empty search.orderOption && search.orderOption==0 ? "selected" : "" }>상품명순</option>			  --%>
+<%-- 		<option value="1"  ${ ! empty search.orderOption && search.orderOption==1 ? "selected" : "" }>높은가격순</option>								 --%>
+<!-- 			</select> -->
+			
+			
+		
+		
 			<select name="searchCondition" class="ct_input_g" style="width:80px">
 				<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
 				<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
@@ -93,6 +109,11 @@ function fncGetUserList(currentPage) {
 		<td align="right" width="70">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
+							
+				
+				
+				
+				
 					<td width="17" height="23">
 						<img src="/images/ct_btnbg01.gif" width="17" height="23">
 					</td>
