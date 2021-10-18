@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CartMapper">
+
+	<resultMap type="cart" id="cartSelectMap">
+		<result property="purchaseProd.prodNo" 				column="PROD_NO" 		jdbcType="INTEGER"/>
+		<result property="purchaseProd.prodName" 	column="PROD_NAME" 		jdbcType="VARCHAR"/>
+		<result property="purchaseProd.price" 				column="PRICE" 		jdbcType="INTEGER"/>
+  		<result property="buyer.userId" 	column="BUYER_ID" 		jdbcType="VARCHAR"/>
+
+  	</resultMap>
+  	
+  	
+	<insert id="addCart" parameterType="Cart">
+		INSERT 
+		INTO Cart(prod_no,prod_name,price,buyer_id)
+		VALUES (
+					
+					#{purchaseProd.prodNo:INTEGER},
+					#{purchaseProd.prodName:VARCHAR},
+					#{purchaseProd.price:INTEGER},
+					#{buyer.userId:VARCHAR}
+					 )
+	</insert>
+	
+	<select  id="getCartList"  parameterType="map"	resultMap="cartSelectMap">
+	  		SELECT *
+	  		FROM
+	  		(SELECT  IT.*, ROWNUM AS row_seq 
+	  		FROM( SELECT *
+	  		FROM cart cr 
+											
+												<where>
+													
+										 				
+												cr.buyer_id = #{buyerId:VARCHAR}
+												</where>
+							
+										
+											
+											
+											) IT
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+		
+	 </select>
+	 
+	  <select  id="getTotalCount" parameterType="string" resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT *
+						FROM cart
+						
+							<where>
+							
+						 			buyer_id = #{value}
+
+							</where>
+						) countTable						
+	 </select>
+	 
+	<delete id="deleteCart" parameterType="Cart">
+		DELETE 
+		FROM CART
+		<where>
+					
+					PROD_NO=#{purchaseProd.prodNo:INTEGER}
+					
+				AND	BUYER_ID =#{buyer.userId:VARCHAR}
+					 
+					 </where>
+					 
+	</delete>
+	 
+	
+	</mapper>

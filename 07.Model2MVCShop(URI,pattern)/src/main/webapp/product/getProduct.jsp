@@ -13,13 +13,18 @@ Product productVO = (Product)request.getAttribute("vo");
 <head>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-
+<c:if test = "${product.proTranCode=='001' || product.proTranCode=='002' || product.proTranCode=='003'}">
+<script type="text/javascript">
+alert("현재 품절인 물품입니다");
+</script>
+</c:if>
 <title>Insert title here</title>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
 <form name="detailForm" method="post">
+
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -127,7 +132,21 @@ Product productVO = (Product)request.getAttribute("vo");
 			
 			
 			<c:if test="${menu=='search' }">
+			
+			
 			<tr>
+			<c:if test="${cart!='true'}">
+					<td width="17" height="23">
+					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
+				</td>
+				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
+					<a href="/purchase/addCart?prodNo=${product.prodNo }">장바구니담기</a>
+				</td>
+				<td width="14" height="23">
+					<img src="/images/ct_btnbg03.gif" width="14" height="23">
+				</td>
+				<td width="30"></td>
+			</c:if>
 		
 				<td width="17" height="23">
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
@@ -139,6 +158,7 @@ Product productVO = (Product)request.getAttribute("vo");
 					<img src="/images/ct_btnbg03.gif" width="14" height="23">
 				</td>
 				<td width="30"></td>
+		
 		
 				<td width="17" height="23">
 					<img src="/images/ct_btnbg01.gif" width="17" height="23"/>

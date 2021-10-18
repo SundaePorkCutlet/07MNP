@@ -61,5 +61,12 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	public int getTotalCount(String buyerId) throws Exception {
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId);
 	}
+	
 
-}
+		
+		
+	}
+	
+
+
+

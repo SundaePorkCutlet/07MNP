@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
+import com.model2.mvc.service.cart.CartService;
+import com.model2.mvc.service.domain.Cart;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
@@ -41,6 +43,10 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	@Qualifier("cartServiceImpl")
+	private CartService cartService;
 	//setter Method 구현 않음
 		
 	public PurchaseController(){
@@ -285,4 +291,91 @@ public class PurchaseController {
 		
 		return "forward:/miniGame/random.jsp";
 	}
+	
+	@RequestMapping(value="listCart")
+	public String listCart(@ModelAttribute("search") Search search, 
+			HttpServletRequest request,
+			
+									Model model ) throws Exception{
+		
+		
+	
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		
+		System.out.println("search"+search);
+		
+		// Business logic 수행
+		Map<String,Object> map=cartService.getCartList(search,((User)request.getSession(true).getAttribute("user")).getUserId());
+
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
+		
+		
+		
+		
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+
+		
+		
+		
+		return "forward:/purchase/listCart.jsp";
+	}
+	
+	@RequestMapping(value="addCart")
+	public String addCart( HttpServletRequest request,
+						@RequestParam("prodNo") int prodNo,
+						Model model
+			                     ) throws Exception{
+	
+		Product product = productService.getProduct(prodNo);
+		
+		Cart cart = new Cart();
+		cart.setBuyer(((User)request.getSession(true).getAttribute("user")));
+		cart.setPurchaseProd(product);
+		
+		System.out.println(cart);
+		cartService.addCart(cart);
+	
+		
+		
+		
+		model.addAttribute("product",product);
+		model.addAttribute("menu","search");
+		model.addAttribute("cart","true");
+	
+		
+	
+		
+		
+		
+		
+		return "forward:/product/getProduct.jsp";
+	}
+	
+	@RequestMapping(value="deleteCart")
+	public String deleteCart( HttpServletRequest request,
+						@RequestParam("prodNo") int prodNo,
+						Model model
+			                     ) throws Exception{
+		Product product = productService.getProduct(prodNo);
+		Cart cart = new Cart();
+		cart.setPurchaseProd(product);
+		cart.setBuyer(((User)request.getSession(true).getAttribute("user")));
+		
+		
+		cartService.deleteCart(cart);
+		model.addAttribute("cart",cart);
+		
+		return "forward:/purchase/listCart";
+	}
+		
+	
 }

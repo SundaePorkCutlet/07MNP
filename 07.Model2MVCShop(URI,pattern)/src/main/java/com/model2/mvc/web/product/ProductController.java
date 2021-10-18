@@ -75,7 +75,7 @@ public class ProductController {
 		System.out.println("======================================================================");
 		
 			
-			String temDir = "C:\\Users\\È«\\git\\07MNP\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles"; 
+			String temDir = "C:\\Users\\AIA\\git\\07MNP\\07.Model2MVCShop(URI,pattern)\\src\\main\\webapp\\images\\uploadFiles"; 
 		
 				
 			
@@ -175,7 +175,7 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		// Model °ú View ¿¬°á
 		
-	
+	System.out.println("produdduduududududu"+product);
 		
 		
 		Cookie[] cook = request.getCookies();
@@ -208,6 +208,7 @@ public class ProductController {
 		modelAndView.addObject("menu",request.getParameter("menu"));
 		modelAndView.setViewName("forward:/product/getProduct.jsp");
 		modelAndView.addObject("Cookie",cookiee);
+	
 		return modelAndView;
 	}
 	

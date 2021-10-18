@@ -10,8 +10,14 @@
 
 <link href="/css/left.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript">
+function listcart(){
+	popWin = window.open("/purchase/listCart","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+}
+</script>
 </head>
-
+<script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
+<script>twemoji.parse(document.body, {size: 16});</script>
 <body topmargin="0" leftmargin="0">
  
 <table width="100%" height="50" border="0" cellpadding="0" cellspacing="0">
@@ -23,9 +29,11 @@
     <td width="800" height="30"><h2>Model2 MVC Shop</h2></td>
       <td>
       <c:if test="${ ! empty user }">
+     
       아이디 : ${user.userId }
       포인트 : <fmt:formatNumber value="${user.point }" pattern="#,###" />
-
+        <a href = "javascript:listcart();" style="font-size:12px">&#128092;</a> 장바구니
+   
 
       </c:if>
       </td>
