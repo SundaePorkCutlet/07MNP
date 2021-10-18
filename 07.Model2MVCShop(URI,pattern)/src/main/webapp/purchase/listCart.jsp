@@ -16,6 +16,10 @@
 function cart(){
 	popWin = window.open("/purchase/deleteCart?prodNo=${cart.purchaseProd.prodNo}&menu=search","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 }
+function fncGetUserList(currentPage) {
+	document.getElementById("currentPage").value = currentPage;
+   	document.detailForm.submit();		
+}
 </script>
 </head>
 
@@ -23,7 +27,7 @@ function cart(){
 
 <div style="width: 98%; margin-left: 10px;">
 
-<form name="detailForm" action="/purchase/listPurchase" method="post">
+<form name="detailForm" action="/purchase/listCart" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
