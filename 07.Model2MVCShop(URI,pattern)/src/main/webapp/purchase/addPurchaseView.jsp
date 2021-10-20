@@ -137,6 +137,23 @@ function fncAddPurchase() {
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+		<tr>
+		<td width="104" class="ct_write">구매수량</td>
+		<td bgcolor="D6D6D6" width="1"></td>
+		<td class="ct_write01">
+			<select 	name="amount"		class="ct_input_g" 
+							style="width: 100px; height: 19px" maxLength="20">
+			<c:forEach var="amount" begin="1" end ="${product.amount}" >
+				
+				<option value="${amount}"  selected="selected">${amount}</option>
+			
+				</c:forEach>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
+	</tr>
 	<tr>
 		<td width="104" class="ct_write">구매자이름</td>
 		<td bgcolor="D6D6D6" width="1"></td>

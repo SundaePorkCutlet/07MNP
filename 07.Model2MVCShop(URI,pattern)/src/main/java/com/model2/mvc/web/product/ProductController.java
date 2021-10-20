@@ -69,6 +69,16 @@ public class ProductController {
 		//Business Logic
 		
 		product.setFileName(file.getOriginalFilename());
+		
+		Product prod = productService.getProduct(product.getProdNo());
+		System.out.println("pppppp"+prod);
+		
+		if(prod !=null) {
+		System.out.println("들어오나?");
+			int amount = prod.getAmount() + product.getAmount();
+		
+		product.setAmount(amount);}
+		
 		ModelAndView modelAndView = new ModelAndView();
 	
 		
@@ -226,6 +236,23 @@ public class ProductController {
 		return modelAndView;
 	}
 	
+//	@RequestMapping(value="updateAmount",method=RequestMethod.POST)
+//	public ModelAndView updateAmount( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
+//
+//		System.out.println("/updateProduct : post");
+//		//Business Logic
+//		
+//		int amount = (productService.getProduct(product.getProdNo())).getAmount() - product.getAmount();
+//		product.setAmount(amount);
+//		productService.updateAmount(product);
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("redirect:/product/getProduct?prodNo="+ product.getProdNo()+"&menu=manage");
+//		
+//		
+//		
+//		return modelAndView;
+//	}
+	
 	//@RequestMapping("/updateProduct.do")
 	@RequestMapping(value="updateProduct",method=RequestMethod.POST)
 	public ModelAndView updateProduct( @ModelAttribute("product") Product product , Model model , HttpSession session) throws Exception{
@@ -268,6 +295,8 @@ public class ProductController {
 		return "forward:/product/listProduct.jsp";
 
 	}
+	
+	
 	
 	
 }

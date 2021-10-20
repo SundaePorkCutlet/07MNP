@@ -47,7 +47,20 @@ function fncRandom() {
 		<td align="center">
 			<a href="javascript:fncRandom();">¹èÆÃ!</a>
 		</td>
+		</tr>
+		
+		
 	
+	
+	
+	
+	
+	
+	<tr>
+	<td align="center">
+			<a href="/purchase/addPoint">µ·¹ú±â!</a>
+		</td>
+	</tr>
 			</table>
 			</form>
 </body>

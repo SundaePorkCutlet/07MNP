@@ -54,6 +54,8 @@ function fncGetUserList(currentPage) {
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">가격</td>
 		<td class="ct_line02"></td>
+		<td class="ct_list_b" width="150">상태</td>
+		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">삭제</td>
 		
 	<tr>
@@ -65,24 +67,41 @@ function fncGetUserList(currentPage) {
 
 	<tr class="ct_list_pop">
 		<td align="center">
-	
+		<c:if test="${cart.amount!=0 }">
 			<a href="/product/getProduct?prodNo=${cart.purchaseProd.prodNo}&menu=search"
 			target="rightFrame">${cart.purchaseProd.prodNo}</a>
+			</c:if>
+			
+			<c:if test="${cart.amount==0 }">
+			${cart.purchaseProd.prodNo}
+			</c:if>
 			
 		</td>
 		<td></td>
 		<td align="left">
+			<c:if test="${cart.amount!=0 }">
 			<a href="/product/getProduct?prodNo=${cart.purchaseProd.prodNo}&menu=search"
 			target="rightFrame">${cart.purchaseProd.prodName}</a>
+			</c:if>
+			
+			<c:if test="${cart.amount==0 }">
+			${cart.purchaseProd.prodName}
+			</c:if>
+			
 		</td>
 		<td></td>
 		<td align="left">${cart.purchaseProd.price }</td>
+		<td></td>
+			<td align="left"><c:if test= "${cart.amount==0 }">
+			품절 상품 입니다.
+			</c:if></td>
 		<td></td>
 			<td align="left">
 			<a href="/purchase/deleteCart?prodNo=${cart.purchaseProd.prodNo}&menu=search"
 			target="rightFrame">&#128701;</a>
 		</td>
 		<td></td>
+		
 	
 
 	

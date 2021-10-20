@@ -143,7 +143,11 @@ function fncGetUserList(currentPage) {
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>
-		<td class="ct_list_b">현재상태</td>	
+		<td class="ct_list_b">수량</td>
+		<c:if test="${menu=='manage' }">
+		<td class="ct_line02"></td>
+		<td class="ct_list_b">상태</td>
+		</c:if>		
 	</tr>
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
@@ -173,6 +177,9 @@ function fncGetUserList(currentPage) {
 		<td></td>
 		<td align="left">${product.regDate }</td>
 		<td></td>
+		<td align="left">${product.amount }</td>
+		<td></td>
+		<c:if test="${menu=='manage' }">
 		<td align="left">
 		
 		<c:if test = "${product.proTranCode=='000'}">
@@ -183,10 +190,10 @@ function fncGetUserList(currentPage) {
 			
 			구매완료
 			
-				<c:if test="${menu=='manage' }">
+				
 			<a href="/purchase/updateTranCodeByProd?ProTranCode=${product.proTranCode}&prodNo=${product.prodNo}&menu=manage">배송하기</a>
 		
-			</c:if>
+		
 			</c:if>
 			
 		<c:if test = "${product.proTranCode=='002'}">
@@ -198,6 +205,7 @@ function fncGetUserList(currentPage) {
 			배송완료
 		</c:if>
 		</td>	
+		</c:if>
 	</tr>
 	
 	

@@ -3,6 +3,7 @@ package com.model2.mvc.web.purchase;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -85,6 +86,7 @@ public class PurchaseController {
 								@RequestParam("receiverAddr") String Addr,
 								@RequestParam("receiverRequest") String Request,
 								@RequestParam("receiverDate") String Date,
+								@RequestParam("amount") int amount,
 								
 								HttpServletRequest request,
 									Model model) throws Exception {
@@ -93,6 +95,15 @@ public class PurchaseController {
 		System.out.println();
 
 		Product product = productService.getProduct(prodNo);
+		
+		int totalamount = product.getAmount() - amount;
+		System.out.println("aaaaa"+totalamount);
+		System.out.println("bbbbb"+amount);
+		
+		product.setAmount(totalamount);
+		productService.updateProduct(product);
+		
+		
 		User user = (User)request.getSession(true).getAttribute("user");
 		int remainPoint = user.getPoint()-product.getPrice();
 		
@@ -124,7 +135,7 @@ public class PurchaseController {
 		}
 	
 	
-//		model.addAttribute("PurchaseProd",product);
+		model.addAttribute("amount",amount);
 //		model.addAttribute("Buyer",request.getSession(true).getAttribute("user"));
 		model.addAttribute("remainPoint",remainPoint);
 		
@@ -315,6 +326,7 @@ public class PurchaseController {
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
+		System.out.println(map.get("list"));
 		
 		
 		
@@ -376,6 +388,25 @@ public class PurchaseController {
 		
 		return "forward:/purchase/listCart";
 	}
-		
 	
+	@RequestMapping(value="addPoint")
+	public String addPoint( HttpServletRequest request,
+			HttpSession session,
+							Model model
+			                     ) throws Exception{
+	
+		User user = new User();
+		user = userService.getUser(((User)request.getSession(true).getAttribute("user")).getUserId());
+		
+		int remainpoint = user.getPoint() + 1000;
+		user.setPoint(remainpoint);
+		userService.updatePoint(user);
+		model.addAttribute("user",user);
+		session.setAttribute("user", user);
+		
+		
+		return "forward:/miniGame/randomView.jsp";
+	
+		
+	}
 }

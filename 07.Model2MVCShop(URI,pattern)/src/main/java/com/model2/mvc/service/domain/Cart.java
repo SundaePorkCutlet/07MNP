@@ -4,6 +4,8 @@ public class Cart {
 	
 	Product purchaseProd;
 	User buyer;
+	int amount;
+	
 	
 	
 	
@@ -15,7 +17,7 @@ public class Cart {
 	
 	@Override
 	public String toString() {
-		return "Cart [purchaseProd=" + purchaseProd + ", buyer=" + buyer + "]";
+		return "Cart [purchaseProd=" + purchaseProd + ", buyer=" + buyer + ", amount=" + amount + "]";
 	}
 
 
@@ -37,6 +39,19 @@ public class Cart {
 	public void setBuyer(User buyer) {
 		this.buyer = buyer;
 	}
+
+
+	public int getAmount() {
+		return amount;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+
+
 
 
 	

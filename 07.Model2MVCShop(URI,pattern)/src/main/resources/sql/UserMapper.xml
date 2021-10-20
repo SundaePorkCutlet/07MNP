@@ -76,6 +76,13 @@
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
+	 
+	 <select id="getPointList" resultMap="userSelectMap">
+	 SELECT *
+	 FROM USERS
+	 ORDER BY DESC POINT
+	 
+	 </select>
 	 	<!--  위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
 	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..

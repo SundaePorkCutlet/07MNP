@@ -11,7 +11,8 @@
 		<result property="purchaseProd.prodName" 	column="PROD_NAME" 		jdbcType="VARCHAR"/>
 		<result property="purchaseProd.price" 				column="PRICE" 		jdbcType="INTEGER"/>
   		<result property="buyer.userId" 	column="BUYER_ID" 		jdbcType="VARCHAR"/>
-
+  			<result property="amount" 	column="AM" 		jdbcType="NUMERIC"/>
+		
   	</resultMap>
   	
   	
@@ -31,8 +32,10 @@
 	  		SELECT *
 	  		FROM
 	  		(SELECT  IT.*, ROWNUM AS row_seq 
-	  		FROM( SELECT *
-	  		FROM cart cr 
+	  		FROM( SELECT cr.* , pc.amount AM 
+	  		FROM cart cr
+	  		FULL outer join product pc
+	  		on cr.prod_no = pc.prod_no 
 											
 												<where>
 													

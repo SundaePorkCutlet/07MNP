@@ -14,13 +14,15 @@
 			<result property = "price" column ="price" jdbcType = "NUMERIC"/> 
 			<result property = "fileName" column ="image_file" jdbcType = "VARCHAR"/> 
 			<result property = "regDate" column ="reg_date" jdbcType = "DATE"/>
+			<result property = "amount" column ="amount" jdbcType = "NUMERIC"/> 
 			<result property = "proTranCode" column = "TSC" jdbcType = "VARCHAR"/>  
 		</resultMap>
 		
 		<insert id="addProduct" parameterType ="product">
 			INSERT 
-			INTO PRODUCT(prod_no, prod_name, prod_detail,manufacture_day,price,image_file,reg_date)
-			VALUES ( seq_product_prod_no.nextval, #{prodName}, #{prodDetail:VARCHAR}, replace(#{manuDate:VARCHAR},'-',''),#{price:NUMERIC},#{fileName:VARCHAR},SYSDATE
+			INTO PRODUCT(prod_no, prod_name, prod_detail,manufacture_day,price,image_file,reg_date,amount)
+			VALUES ( seq_product_prod_no.nextval, #{prodName}, #{prodDetail:VARCHAR}, replace(#{manuDate:VARCHAR},'-',''),#{price:NUMERIC},
+			#{fileName:VARCHAR},SYSDATE,#{amount:NUMERIC}
 			)
 		</insert>
 		
@@ -32,7 +34,13 @@
 			
 		<update id="updateProduct" parameterType ="Product">
 		UPDATE	PRODUCT
-		SET	PROD_NAME=#{prodName:VARCHAR},PROD_DETAIL=#{prodDetail:VARCHAR},MANUFACTURE_DAY=replace(#{manuDate:VARCHAR},'-',''),PRICE=#{price:NUMERIC},IMAGE_FILE=#{fileName:VARCHAR} 
+		SET	PROD_NAME=#{prodName:VARCHAR},PROD_DETAIL=#{prodDetail:VARCHAR},MANUFACTURE_DAY=replace(#{manuDate:VARCHAR},'-',''),PRICE=#{price:NUMERIC},IMAGE_FILE=#{fileName:VARCHAR},amount=#{amount:NUMERIC} 
+		WHERE PROD_NO=#{prodNo}
+		</update>
+		
+		<update id="updateamount" parameterType ="Product">
+		UPDATE	PRODUCT
+		SET AMOUNT = #{amount:NUMERIC}
 		WHERE PROD_NO=#{prodNo}
 		</update>
 		
