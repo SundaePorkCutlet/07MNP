@@ -13,7 +13,7 @@ Product productVO = (Product)request.getAttribute("vo");
 <head>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-<c:if test = "${product.proTranCode=='001' || product.proTranCode=='002' || product.proTranCode=='003'}">
+<c:if test = "${product.amount=='0'}">
 <script type="text/javascript">
 alert("현재 품절인 물품입니다");
 </script>
@@ -139,7 +139,7 @@ alert("현재 품절인 물품입니다");
 		<table border="0" cellspacing="0" cellpadding="0">
 			
 			
-			<c:if test="${menu=='search' }">
+			
 			
 			
 			<tr>
@@ -178,24 +178,9 @@ alert("현재 품절인 물품입니다");
 					<img src="/images/ct_btnbg03.gif" width="14" height="23">
 				</td>
 			</tr>
-			</c:if>
+
 	
-			<c:if test="${menu =='manage'}">
 		
-				<tr>
-				<td width="17" height="23">
-				<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-			</td>
-			<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-				<a href="/product/listProduct?prod_no=${product.prodNo }&menu=manage">확인</a>
-			</td>
-			<td width="14" height="23">
-				<img src="/images/ct_btnbg03.gif" width="14" height="23">
-			</td>
-			<td width="30"></td>
-			
-			</tr>
-			</c:if>
 			
 			
 		</table>

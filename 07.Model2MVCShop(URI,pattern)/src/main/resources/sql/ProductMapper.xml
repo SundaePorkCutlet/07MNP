@@ -16,6 +16,8 @@
 			<result property = "regDate" column ="reg_date" jdbcType = "DATE"/>
 			<result property = "amount" column ="amount" jdbcType = "NUMERIC"/> 
 			<result property = "proTranCode" column = "TSC" jdbcType = "VARCHAR"/>  
+			<result property = "tranNo" column = "TN" jdbcType = "NUMERIC"/>  
+			<result property = "purchaseAmount" column = "PA" jdbcType = "NUMERIC"/>  
 		</resultMap>
 		
 		<insert id="addProduct" parameterType ="product">
@@ -34,7 +36,9 @@
 			
 		<update id="updateProduct" parameterType ="Product">
 		UPDATE	PRODUCT
-		SET	PROD_NAME=#{prodName:VARCHAR},PROD_DETAIL=#{prodDetail:VARCHAR},MANUFACTURE_DAY=replace(#{manuDate:VARCHAR},'-',''),PRICE=#{price:NUMERIC},IMAGE_FILE=#{fileName:VARCHAR},amount=#{amount:NUMERIC} 
+		SET	PROD_NAME=#{prodName:VARCHAR},PROD_DETAIL=#{prodDetail:VARCHAR},
+		MANUFACTURE_DAY=replace(#{manuDate:VARCHAR},'-',''),PRICE=#{price:NUMERIC},
+		IMAGE_FILE=#{fileName:VARCHAR},amount=#{amount:NUMERIC} 
 		WHERE PROD_NO=#{prodNo}
 		</update>
 		
@@ -48,7 +52,49 @@
 	  		SELECT *
 	  		FROM
 	  		(SELECT  IT.*, ROWNUM AS row_seq 
-	  		FROM( SELECT pr.* , NVL(ts.tran_status_code, '000') TSC 
+	  		FROM( SELECT *
+	  		FROM product pr 
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				pr.prod_no like '%'||#{searchKeyword}||'%'
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				pr.prod_name like '%'||#{searchKeyword}||'%'
+													</if>
+													<if test="searchCondition == 2 and searchKeyword !='' ">
+										 				pr.price like '%'||#{searchKeyword}||'%'
+													</if>
+												</where>
+											</if>
+											<if test = "orderOption == 0">
+											ORDER BY pr.PROD_NAME 
+											</if>
+											<if test = "orderOption == 1">
+											ORDER BY  pr.PRICE desc
+											</if>
+											<if test = "orderOption == 2">
+											ORDER BY pr.PRICE
+											</if>
+											<if test = "orderOption == 3">
+											ORDER BY  pr.REG_DATE desc
+											</if>
+											<if test = "orderOption == 4">
+											ORDER BY pr.reg_date
+											</if>
+											
+											
+											) IT
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+		
+	 </select>
+	 
+	 	<select  id="getProductManageList"  parameterType="search"	resultMap="productSelectMap">
+	  		SELECT *
+	  		FROM
+	  		(SELECT  IT.*, ROWNUM AS row_seq 
+	  		FROM( SELECT pr.* , NVL(ts.tran_status_code, '000') TSC ,NVL(ts.tran_No,'00000') TN, NVL(ts.purchase_amount,'0') PA
 	  		FROM product pr LEFT JOIN transaction ts ON pr.prod_no = ts.prod_no
 											<if test="searchCondition != null">
 												<where>
@@ -87,6 +133,25 @@
 	 </select>
 		
 			 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT *
+						FROM product pr 
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			pr.prod_no like '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		pr.prod_name like '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 2 and searchKeyword !='' ">
+							pr.price like '%'||#{searchKeyword}||'%'
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+	 	 <select  id="getTotalManageCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT pr.*, NVL(ts.tran_status_code, '000') TSC
 						FROM product pr LEFT JOIN transaction ts ON pr.prod_no = ts.prod_no

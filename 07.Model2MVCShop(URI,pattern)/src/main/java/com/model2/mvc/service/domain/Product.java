@@ -13,7 +13,9 @@ public class Product {
 	private int prodNo;
 	private Date regDate;
 	private String proTranCode;
+	int tranNo;
 	int amount;
+	int purchaseAmount;
 	
 	public Product(){
 	}
@@ -73,6 +75,22 @@ public class Product {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public int getTranNo() {
+		return tranNo;
+	}
+
+	public void setTranNo(int tranNo) {
+		this.tranNo = tranNo;
+	}
+
+	public int getPurchaseAmount() {
+		return purchaseAmount;
+	}
+
+	public void setPurchaseAmount(int purchaseAmount) {
+		this.purchaseAmount = purchaseAmount;
 	}
 
 	@Override

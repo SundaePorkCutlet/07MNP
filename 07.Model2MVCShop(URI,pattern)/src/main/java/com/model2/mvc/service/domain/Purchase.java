@@ -16,6 +16,7 @@ public class Purchase {
 	private String receiverPhone;
 	private String tranCode;
 	private int tranNo;
+	private int purchaseAmount;
 	
 	public Purchase(){
 	}
@@ -87,6 +88,14 @@ public class Purchase {
 		this.tranNo = tranNo;
 	}
 	
+	public int getPurchaseAmount() {
+		return purchaseAmount;
+	}
+
+	public void setPurchaseAmount(int purchaseAmount) {
+		this.purchaseAmount = purchaseAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "PurchaseVO [buyer=" + buyer + ", divyAddr=" + divyAddr

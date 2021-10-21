@@ -12,10 +12,14 @@ public interface ProductDao {
 	public Product getProduct(int prodNo) throws Exception;
 
 	public List<Product> getProductList(Search search) throws Exception;
+	
+	public List<Product> getProductManageList(Search search) throws Exception;
 
 	public void updateProduct(Product product) throws Exception;
 
 	public int getTotalCount(Search search) throws Exception;
+	
+	public int getTotalManageCount(Search search) throws Exception;
 
 
 }

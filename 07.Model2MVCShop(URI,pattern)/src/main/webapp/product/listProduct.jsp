@@ -56,13 +56,9 @@ function fncGetUserList(currentPage) {
 					<td width="93%" class="ct_ttl01">
 					
 					
-					<c:if test="${menu=='manage' }">
-							상품 관리
-					
-					</c:if>
-					<c:if test="${menu=='search' }">
+				
 							상품 목록 조회
-					</c:if>
+		
 					</td>
 				</tr>
 			</table>
@@ -144,10 +140,10 @@ function fncGetUserList(currentPage) {
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">수량</td>
-		<c:if test="${menu=='manage' }">
+	
 		<td class="ct_line02"></td>
-		<td class="ct_list_b">상태</td>
-		</c:if>		
+	
+		
 	</tr>
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
@@ -163,12 +159,10 @@ function fncGetUserList(currentPage) {
 		<td></td>
 				
 				<td align="left">
-				<c:if test="${menu=='search' }">
+			
 				<a href="/product/getProduct?prodNo=${product.prodNo }&menu=search">${product.prodName }</a>
-				</c:if>
-				<c:if test="${menu=='manage' }">
-				<a href="/product/updateProduct?prodNo=${product.prodNo }">${product.prodName }</a>
-				</c:if>
+			
+			
 				</td>
 				
 		
@@ -179,33 +173,10 @@ function fncGetUserList(currentPage) {
 		<td></td>
 		<td align="left">${product.amount }</td>
 		<td></td>
-		<c:if test="${menu=='manage' }">
-		<td align="left">
+	
 		
-		<c:if test = "${product.proTranCode=='000'}">
-			
-			판매중
-			</c:if>
-			<c:if test = "${product.proTranCode=='001'}">
-			
-			구매완료
-			
-				
-			<a href="/purchase/updateTranCodeByProd?ProTranCode=${product.proTranCode}&prodNo=${product.prodNo}&menu=manage">배송하기</a>
-		
-		
-			</c:if>
-			
-		<c:if test = "${product.proTranCode=='002'}">
-			
-			배송중
-		</c:if>
-		<c:if test = "${product.proTranCode=='003'}">
-			
-			배송완료
-		</c:if>
-		</td>	
-		</c:if>
+
+	
 	</tr>
 	
 	

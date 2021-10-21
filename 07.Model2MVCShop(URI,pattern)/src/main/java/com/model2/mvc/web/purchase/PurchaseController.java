@@ -120,6 +120,7 @@ public class PurchaseController {
 			purchase.setDivyRequest(Request);
 			purchase.setDivyDate(Date);
 			purchase.setTranCode("001");
+			purchase.setPurchaseAmount(amount);
 			purchaseService.addPurchase(purchase);
 			userService.updatePoint(user);
 			
@@ -131,6 +132,7 @@ public class PurchaseController {
 			purchase.setDivyRequest(Request);
 			purchase.setDivyDate(Date);
 			purchase.setTranCode("001");
+			purchase.setPurchaseAmount(amount);
 			purchaseService.addPurchase(purchase);
 		}
 	
@@ -229,25 +231,25 @@ public class PurchaseController {
 	
 	//@RequestMapping("/updateTranCodeByProd.do")
 	@RequestMapping(value="updateTranCodeByProd",method=RequestMethod.GET)
-	public String updateTranCodeByProd( @RequestParam("prodNo") int prodNo,
+	public String updateTranCodeByProd( @RequestParam("tranNo") int tranNo,
 						@RequestParam("ProTranCode") String TranCode,  
 									Model model,
 									HttpServletRequest request) throws Exception{
 
 		System.out.println("/updateTranCodeByProd : GET");
 		//Business Logic
-		Purchase purchase = purchaseService.getPurchase2(prodNo);
+		Purchase purchase = purchaseService.getPurchase(tranNo);
 		String tran=TranCode;
 		if("001".equals(tran)) {
 			tran = "002";
 			purchase.setTranCode(tran);
 			purchaseService.updateTranCode(purchase);
 		}
-		System.out.println(request.getParameter("menu"));
-		model.addAttribute("menu",request.getParameter("menu"));
+
+	
 		
 		
-		return "forward:/product/listProduct";
+		return "forward:/product/listProductManage";
 	}
 	
 	//@RequestMapping("/updateTranCode.do")
