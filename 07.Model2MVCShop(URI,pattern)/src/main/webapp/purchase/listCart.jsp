@@ -54,7 +54,7 @@ function fncGetUserList(currentPage) {
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">가격</td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b" width="150">상태</td>
+		<td class="ct_list_b" width="150">남은수량</td>
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">삭제</td>
 		
@@ -94,7 +94,11 @@ function fncGetUserList(currentPage) {
 		<td></td>
 			<td align="left"><c:if test= "${cart.amount==0 }">
 			품절 상품 입니다.
-			</c:if></td>
+			</c:if>
+			<c:if test= "${cart.amount!=0 }">
+			${cart.amount }
+			</c:if>
+			</td>
 		<td></td>
 			<td align="left">
 			<a href="/purchase/deleteCart?prodNo=${cart.purchaseProd.prodNo}&menu=search"

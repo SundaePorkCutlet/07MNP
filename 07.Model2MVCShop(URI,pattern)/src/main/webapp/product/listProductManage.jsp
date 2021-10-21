@@ -147,6 +147,7 @@ function fncGetUserList(currentPage) {
 		<td class="ct_list_b">남은수량</td>	
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">상태</td>
+		<td class="ct_line02"></td>
 
 	</tr>
 	<tr>

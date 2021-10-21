@@ -11,7 +11,7 @@
 		<result property="purchaseProd.prodName" 	column="PROD_NAME" 		jdbcType="VARCHAR"/>
 		<result property="purchaseProd.price" 				column="PRICE" 		jdbcType="INTEGER"/>
   		<result property="buyer.userId" 	column="BUYER_ID" 		jdbcType="VARCHAR"/>
-  			<result property="amount" 	column="AM" 		jdbcType="NUMERIC"/>
+  		<result property="amount" 	column="AM" 		jdbcType="NUMERIC"/>
 		
   	</resultMap>
   	

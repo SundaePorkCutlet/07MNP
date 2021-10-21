@@ -140,7 +140,6 @@ function fncGetUserList(currentPage) {
 		<td class="ct_list_b">등록일</td>	
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">수량</td>
-	
 		<td class="ct_line02"></td>
 	
 		
@@ -159,20 +158,30 @@ function fncGetUserList(currentPage) {
 		<td></td>
 				
 				<td align="left">
-			
+				<c:if test="${product.amount!=0 }">
 				<a href="/product/getProduct?prodNo=${product.prodNo }&menu=search">${product.prodName }</a>
-			
-			
+				</c:if>
+				<c:if test="${product.amount==0 }">
+				${product.prodName }
+				</c:if>
 				</td>
 				
 		
 		<td></td>
+		
 		<td align="left">${product.price }</td>
 		<td></td>
 		<td align="left">${product.regDate }</td>
 		<td></td>
+		<c:if test="${product.amount!=0 }">
 		<td align="left">${product.amount }</td>
 		<td></td>
+		</c:if>
+		<c:if test="${product.amount==0 }">
+		<td align="left">품절된 상품입니다.</td>
+		<td></td>
+		</c:if>
+		
 	
 		
 
